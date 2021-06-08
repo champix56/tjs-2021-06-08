@@ -5,13 +5,13 @@ function App() {
     <div className="App">
       Demat Breizh
       <hr />
-      <Button>
+      <Button bgcolor="green">
         <img src="https://cdn1.iconfinder.com/data/icons/science-technology-outline/91/Science__Technology_23-256.png" alt="click"/>
         Hello
       </Button>
-      {/* <Button title="bejamin"></Button>
-      <Button title="Cliquez ici"></Button>
-      <Button title="Clequez PAS ici"></Button> */}
+      <Button bgcolor="tomato" isItalic={false}><h1>Benjamin</h1></Button>
+      <Button bgcolor="skyblue">Cliquez PAS ici</Button>
+      <Button >clickez Ici</Button>
     </div>
   );
 }

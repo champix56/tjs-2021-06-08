@@ -16,3 +16,6 @@
     max-height: 48px;
     max-width: 48px;
 }
+.clicked{
+    box-shadow: 10px 10px 25px gray;
+}
