@@ -1,25 +1,55 @@
 {
-    "images":[
-        {
-            "id":1,
-            "title":"image1",
-            "url":"image1.jpg",
-            "w":1024,
-            "h":768
+  "images": [
+    {
+      "id": 1,
+      "title": "image1",
+      "url": "image1.jpg",
+      "w": 1024,
+      "h": 768
+    },
+    {
+        "id": 2,
+        "title": "image2",
+        "url": "image2.jpg",
+        "w": 1024,
+        "h": 768
+      },
+      {
+        "id": 3,
+        "title": "image3",
+        "url": "image3.jpg",
+        "w": 1024,
+        "h": 768
+      }
+  ],
+  "memes": [
+    {
+      "id": 1,
+      "title": "titre du meme",
+      "text": "",
+      "x": 100,
+      "y": 100,
+      "imageId": 1
+    },
+    {
+        "id": 2,
+        "title": "azert",
+        "text": "",
+        "x": 100,
+        "y": 100,
+        "imageId": 2
+      },
+      {
+          "id": 3,
+          "title": "zer",
+          "text": "",
+          "x": 100,
+          "y": 100,
+          "imageId": 2
         }
-    ],
-    "memes":[
-        {
-            "id":1,
-            "title":"titre du meme",
-            "text":"",
-            "x":100,
-            "y":100,
-            "imageId":1
-        }
-    ],
-    "config":{
-        "title":"meme.js",
-        "author":"alex"
-    }
+  ],
+  "config": {
+    "title": "meme.js",
+    "author": "alex"
+  }
 }
