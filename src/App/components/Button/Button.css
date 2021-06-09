@@ -21,3 +21,6 @@
 .click{
     box-shadow: 10px 10px 15px gray;
 }
+.disabled{
+    background-color: grey !important;
+}
