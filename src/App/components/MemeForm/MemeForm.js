@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './MemeForm.module.css';
 
 const MemeForm = (props) => {
-  const [state, setstate] = useState({ titre: 'bla', x: 10, y: 20, text: 'coucou', image: 1 });
+  const [state, setstate] = useState({ titre: 'bla', x: 10, y: 20, text: 'coucou', imageId: 1 });
   return (
     <div className={styles.MemeForm} data-testid="MemeForm">
       <form onSubmit={(evt) => {
@@ -19,8 +19,8 @@ const MemeForm = (props) => {
         <label htmlFor="image">image</label><br />
         
         <select onChange={evt => {
-          setstate({ ...state, image: evt.target.value });
-        }} value={state.image} id="image">
+          setstate({ ...state, imageId: evt.target.value });
+        }} value={state.imageId} id="image">
           {
             props.images.map((element,index)=><option value={element.id} key={"option-image-"+index} >{element.title}</option>)
           }
