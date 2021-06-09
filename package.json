@@ -17,7 +17,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "component": "npx generate-react-cli component"
+    "component": "npx generate-react-cli component",
+    "json":"json-server -p 7956 db/db.json"
   },
   "eslintConfig": {
     "extends": [
