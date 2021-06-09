@@ -1,26 +1,32 @@
-import { logDOM } from '@testing-library/dom';
-import './App.css';
+import React from 'react';
 import Button from './components/Button/Button';
-function App() {
-  //variable local ne sera pas mis a jour dans la representation du composant car pas variable etatique
-  let counter=0;
-  return (
-    <div className="App">
-      Demat Breizh -- {counter}
-      <hr />
-      <Button bgcolor="green" lorsqueJeClickeraiSurLeButton={argument=>{
-        //la variable est bien mise a jour mais ne sera pas disposé dans la bonne valeur actuelle car pas une valeur gerre comme un etat avec les refraichissement lié aux etats.
-        counter++;
-        console.log('Depuis App : '+counter);
+/**
+ * Composant principale de notre application
+ */
+class App extends React.Component {
+  //counter=1
+  constructor(props){
+    super(props);
+    this.state={counter:0, maChaine:'Hello'};
+  }
+  componentDidUpdate(pprops,pstate){
+    console.log(arguments);
+    console.log(this.state);
+    //Verif et moddif d'etat suite a une modif d'etat (action en chaine) Attention prevenir mles boucles infinies
+    if(this.state.counter===1 && this.state.maChaine!=='new Val'){this.setState({maChaine:'new Val'});}
+  }
+  render() {
+    return <div className="App">
+    {this.state.maChaine} voici le counter : {this.state.counter}
+      <Button bgcolor="green" lorsqueJeClickeraiSurLeButton={argument => {
+        this.setState({counter:this.state.counter+1});
+        //decalage du a l'async 
+        console.log('Depuis App : ' + this.state.counter);
       }}>
-        <img src="https://cdn1.iconfinder.com/data/icons/science-technology-outline/91/Science__Technology_23-256.png" alt="click"/>
+        <img src="https://cdn1.iconfinder.com/data/icons/science-technology-outline/91/Science__Technology_23-256.png" alt="click" />
         Hello
       </Button>
-      <Button bgcolor="tomato" isItalic={false}><h1>Benjamin</h1></Button>
-      <Button bgcolor="skyblue">Cliquez PAS ici</Button>
-      <Button >clickez Ici</Button>
-    </div>
-  );
+    </div>;
+  }
 }
-
 export default App;
