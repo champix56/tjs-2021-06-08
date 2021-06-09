@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from './components/Button/Button';
+import FlexLayout from './components/FlexLayout/FlexLayout';
+import MemeForm from './components/MemeForm/MemeForm';
 /**
  * Composant principale de notre application
  */
@@ -17,15 +18,11 @@ class App extends React.Component {
   }
   render() {
     return <div className="App">
-    {this.state.maChaine} voici le counter : {this.state.counter}
-      <Button bgcolor="green" lorsqueJeClickeraiSurLeButton={argument => {
-        this.setState({counter:this.state.counter+1});
-        //decalage du a l'async 
-        console.log('Depuis App : ' + this.state.counter);
-      }}>
-        <img src="https://cdn1.iconfinder.com/data/icons/science-technology-outline/91/Science__Technology_23-256.png" alt="click" />
-        Hello
-      </Button>
+      <FlexLayout>
+          <div></div>
+          <MemeForm/>
+      </FlexLayout>
+     
     </div>;
   }
 }
