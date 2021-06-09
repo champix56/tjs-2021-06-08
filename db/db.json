@@ -1,0 +1,25 @@
+{
+    "images":[
+        {
+            "id":1,
+            "title":"image1",
+            "url":"image1.jpg",
+            "w":1024,
+            "h":768
+        }
+    ],
+    "memes":[
+        {
+            "id":1,
+            "title":"titre du meme",
+            "text":"",
+            "x":100,
+            "y":100,
+            "imageId":1
+        }
+    ],
+    "config":{
+        "title":"meme.js",
+        "author":"alex"
+    }
+}
