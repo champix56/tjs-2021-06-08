@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './MemeForm.module.css';
-
+import { REST_ADR_SRV } from '../../config/config';
 const MemeForm = (props) => {
   const [state, setstate] = useState({ titre: 'bla', x: 10, y: 20, text: 'coucou', imageId: 2, color: '#000000', fsize: 15 });
   useEffect(() => {
@@ -14,7 +14,14 @@ const MemeForm = (props) => {
       <form onSubmit={(evt) => {
         //annulation du comportement par def. de la soumission d'un formulaire
         evt.preventDefault();
-
+        fetch(`${REST_ADR_SRV}/memes${state.id ? '/' + state.id : ''}`, {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: (state.id ? 'PUT' : 'POST'),
+          body: JSON.stringify(state)
+        }).then(flux => flux.json())
+          .then(obj => { setstate(obj) });
       }}>
         <label htmlFor="titre">Titre</label><br /><input onChange={evt => {
           setstate({ ...state, titre: evt.target.value });
