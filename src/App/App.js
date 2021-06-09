@@ -27,7 +27,10 @@ class App extends React.Component {
     return <div className="App">
       <FlexLayout>
         <div>
-          <MemeViewer meme={{...this.state.current,image:this.state.images.find(e=>e.id===this.state.current.imageId)}}/>
+          <MemeViewer meme={{
+            ...this.state.current,
+            image:this.state.images.find(e=>e.id===this.state.current.imageId)
+            }}/>
         </div>
         <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
       </FlexLayout>
