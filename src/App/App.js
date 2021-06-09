@@ -10,7 +10,7 @@ class App extends React.Component {
   //counter=1
   constructor(props) {
     super(props);
-    this.state = { current: { titre: '', x: 0, y: 0, text: '', imageId: 1 }, images:[] };
+    this.state = { current: { titre: 'bla', x: 10, y: 20, text: 'coucou', imageId: 2,color:'#000000', fsize:15 }, images:[] };
   }
   componentDidMount() {
     fetch(`${REST_ADR_SRV}/images`)

@@ -1,2 +1,4 @@
-.FlexLayout {display: flex;}
+.FlexLayout {display: flex;height: 80vh; }
+.FlexLayout > div >svg{height:100% }
+.FlexLayout > div:first-child{ width:100%;text-align: center;}
 .FlexLayout>*:first-child {flex-grow: 1;}
