@@ -1,6 +1,7 @@
 import React from 'react';
 import FlexLayout from './components/FlexLayout/FlexLayout';
 import MemeForm from './components/MemeForm/MemeForm';
+import { REST_ADR_SRV } from './config/config';
 /**
  * Composant principale de notre application
  */
@@ -8,7 +9,12 @@ class App extends React.Component {
   //counter=1
   constructor(props) {
     super(props);
-    this.state = { current: { titre: '', x: 0, y: 0, text: '', image: 0 } };
+    this.state = { current: { titre: '', x: 0, y: 0, text: '', image: 0 }, images:[] };
+  }
+  componentDidMount() {
+    fetch(`${REST_ADR_SRV}/images`)
+      .then(flux => flux.json())
+      .then(arr => this.setState({ images: arr }))
   }
   componentDidUpdate(pprops, pstate) {
     console.log(arguments);
@@ -20,7 +26,7 @@ class App extends React.Component {
     return <div className="App">
       <FlexLayout>
         <div></div>
-        <MemeForm onSubmit={formState=>this.setState({current:formState})} />
+        <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
       </FlexLayout>
       {JSON.stringify(this.state)}
     </div>;
