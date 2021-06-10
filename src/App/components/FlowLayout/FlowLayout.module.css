@@ -1,0 +1,2 @@
+.FlowLayout {display: flex;flex-wrap: wrap; flex-direction: row;}
+.FlowLayout>* { flex:1; max-height: 400px;}
