@@ -10,10 +10,12 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import {
   BrowserRouter as Router,
+  Link,
   Route,
   Switch,
   useParams
 } from 'react-router-dom'
+import ViewerLayout from './components/ViewerLayout/ViewerLayout';
 
 /**
  * Composant principale de notre application
@@ -59,10 +61,10 @@ class App extends React.Component {
           <Route path="/" exact><h1>Demat & degemer mat im breizh</h1></Route>
           <Route path="/thumbnail">
             <FlowLayout>
-              {this.state.memes.map((elem, i) => <MemeViewer key={'meme-' + i} meme={{
+              {this.state.memes.map((elem, i) => <Link to={'/view/'+elem.id}><MemeViewer key={'meme-' + i} meme={{
                 ...elem,
                 image: this.state.images.find(e => e.id === elem.imageId)
-              }} />)}
+              }} /></Link>)}
             </FlowLayout>
           </Route>
           <Route path="/new">
@@ -86,6 +88,9 @@ class App extends React.Component {
               </div>
               <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
             </FlexLayout>
+          </Route>
+          <Route path="/view/:memeId">
+                <ViewerLayout/>
           </Route>
         </Switch>
       </div>

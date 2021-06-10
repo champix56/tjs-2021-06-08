@@ -1,0 +1,7 @@
+.ViewerLayout {
+    height: calc(100vh - 80px);
+}
+.ViewerLayout >*{
+    text-align: center;
+    max-height: 80%;
+}
