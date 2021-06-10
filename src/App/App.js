@@ -8,6 +8,13 @@ import store, { initialState, globalInitialState } from './store/store';
 import Navbar from './components/Navbar/Navbar';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useParams
+} from 'react-router-dom'
+
 /**
  * Composant principale de notre application
  */
@@ -43,29 +50,47 @@ class App extends React.Component {
     if (this.state.counter === 1 && this.state.maChaine !== 'new Val') { this.setState({ maChaine: 'new Val' }); }
   }
   render() {
-    return <>
+    
+    return <Router>
       <Header />
-      <Navbar/>
+      <Navbar />
       <div className="App">
-
-        <FlowLayout>
-          {this.state.memes.map((elem, i) => <MemeViewer key={'meme-' + i} meme={{
-            ...elem,
-            image: this.state.images.find(e => e.id === elem.imageId)
-          }} />)}
-        </FlowLayout>
-        <FlexLayout>
-          <div>
-            <MemeViewer meme={{
-              ...this.state.current,
-              image: this.state.images.find(e => e.id === this.state.current.imageId)
-            }} />
-          </div>
-          <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
-        </FlexLayout>
+        <Switch>
+          <Route path="/" exact><h1>Demat & degemer mat im breizh</h1></Route>
+          <Route path="/thumbnail">
+            <FlowLayout>
+              {this.state.memes.map((elem, i) => <MemeViewer key={'meme-' + i} meme={{
+                ...elem,
+                image: this.state.images.find(e => e.id === elem.imageId)
+              }} />)}
+            </FlowLayout>
+          </Route>
+          <Route path="/new">
+            <FlexLayout>
+              <div>
+                <MemeViewer meme={{
+                  ...this.state.current,
+                  image: this.state.images.find(e => e.id === this.state.current.imageId)
+                }} />
+              </div>
+              <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
+            </FlexLayout>
+          </Route>
+          <Route path="/edit/:memeId">
+            <FlexLayout>
+              <div>
+                <MemeViewer meme={{
+                  ...this.state.current,
+                  image: this.state.images.find(e => e.id === this.state.current.imageId)
+                }} />
+              </div>
+              <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
+            </FlexLayout>
+          </Route>
+        </Switch>
       </div>
       <Footer />
-    </>
+    </Router>
 
   }
 }

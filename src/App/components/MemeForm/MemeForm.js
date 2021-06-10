@@ -3,25 +3,39 @@ import PropTypes from 'prop-types';
 import styles from './MemeForm.module.css';
 import { REST_ADR_SRV } from '../../config/config';
 import store, { initialState, PUBLIC_ACTION_CURRENT } from '../../store/store';
+import { useHistory, useLocation, useParams, withRouter } from 'react-router-dom';
 const MemeForm = (props) => {
   const [state, setstate] = useState(initialState.current);
+  const memeId=props.match.params.memeId;
+  // console.log('%c%s','color:tomato;font-size:45pt;','props withRouter charged');
+  // console.log(props);
+  // console.log(useParams(),useHistory(),useLocation());
+  
+  //effect pour le changement du memeId
+  useEffect(() => {
+    if(undefined!==memeId){
+      store.dispatch({type:PUBLIC_ACTION_CURRENT.LOAD_CURRENT,value:memeId})
+    }
+  },[memeId]);
+  //effect de didMount (dependances vide)
   useEffect(() => {
     setstate(store.getState().meme.current)
-    store.subscribe(()=>{
+    store.subscribe(() => {
       setstate(store.getState().meme.current)
     })
   }, []);
+  //component didUpdate (dependance state)
   useEffect(() => {
     //appele de la func prent envoyé par les props
-    store.dispatch({type:PUBLIC_ACTION_CURRENT.SET_CURRENT,value:state})
+    store.dispatch({ type: PUBLIC_ACTION_CURRENT.SET_CURRENT, value: state })
   }, [state]);
-
+  
   return (
     <div className={styles.MemeForm} data-testid="MemeForm">
       <form onSubmit={(evt) => {
         //annulation du comportement par def. de la soumission d'un formulaire
         evt.preventDefault();
-        store.dispatch({type:PUBLIC_ACTION_CURRENT.SAVE_CURRENT});
+        store.dispatch({ type: PUBLIC_ACTION_CURRENT.SAVE_CURRENT });
       }}>
         <label htmlFor="titre">Titre</label><br /><input onChange={evt => {
           setstate({ ...state, titre: evt.target.value });
@@ -77,4 +91,4 @@ MemeForm.propTypes = {
 
 
 
-export default MemeForm;
+export default withRouter(MemeForm);
