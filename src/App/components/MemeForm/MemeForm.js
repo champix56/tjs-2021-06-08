@@ -6,9 +6,9 @@ import store, { initialState, PUBLIC_ACTION_CURRENT } from '../../store/store';
 const MemeForm = (props) => {
   const [state, setstate] = useState(initialState.current);
   useEffect(() => {
-    setstate(store.getState().current)
+    setstate(store.getState().meme.current)
     store.subscribe(()=>{
-      setstate(store.getState().current)
+      setstate(store.getState().meme.current)
     })
   }, []);
   useEffect(() => {

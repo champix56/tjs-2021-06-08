@@ -3,7 +3,7 @@ import FlexLayout from './components/FlexLayout/FlexLayout';
 import MemeForm from './components/MemeForm/MemeForm';
 import MemeViewer from './components/MemeViewer/MemeViewer';
 import { REST_ADR_SRV } from './config/config';
-import store, { initialState, PUBLIC_ACTION_CURRENT } from './store/store';
+import store, { initialState, globalInitialState } from './store/store';
 /**
  * Composant principale de notre application
  */
@@ -12,15 +12,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: initialState.current,
-      images: []
+      ...initialState,
+      ...globalInitialState
     };
   }
   componentDidMount() {
-    this.setState({current:store.getState().current})
-    store.subscribe(()=>{
+    this.setState({ 
+      ...store.getState().meme, 
+      ...store.getState().datas 
+    })
+    store.subscribe(() => {
       console.log('Etat de app mis a jour par subscribe');
-      this.setState({current:store.getState().current})
+      this.setState({ 
+        ...store.getState().meme, 
+        ...store.getState().datas 
+      })
     })
     // fetch(`${REST_ADR_SRV}/images`)
     //   .then(flux => flux.json())
