@@ -43,7 +43,11 @@ class App extends React.Component {
     if (this.state.counter === 1 && this.state.maChaine !== 'new Val') { this.setState({ maChaine: 'new Val' }); }
   }
   render() {
-    return <div className="App">
+    return <>
+      <Header />
+      <Navbar/>
+      <div className="App">
+
         <FlowLayout>
           {this.state.memes.map((elem, i) => <MemeViewer key={'meme-' + i} meme={{
             ...elem,
@@ -59,7 +63,10 @@ class App extends React.Component {
           </div>
           <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
         </FlexLayout>
-      </div>;
+      </div>
+      <Footer />
+    </>
+
   }
 }
 export default App;

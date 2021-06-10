@@ -1,0 +1,5 @@
+.Header {font-size: 32px;}
+.Header>span {margin:0 8px}
+.orange {color: tomato; font-weight: 900;}
+.blue {color: skyblue;font-weight: 700;}
+.italic {font-style: italic;}
