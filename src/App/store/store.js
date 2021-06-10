@@ -26,20 +26,20 @@ export const PUBLIC_ACTION_GLOBAL = Object.freeze({
  */
 const globalReducer = (state = globalInitialState, action) => {
     console.log(state);
-const typeAction=(action.type.includes('@@redux/INIT')?PUBLIC_ACTION_GLOBAL.INITIAL_LOAD:action.type)
+    const typeAction = (action.type.includes('@@redux/INIT') ? PUBLIC_ACTION_GLOBAL.INITIAL_LOAD : action.type)
     switch (typeAction) {
         case PUBLIC_ACTION_GLOBAL.INITIAL_LOAD:
             fetch(`${REST_ADR_SRV}/images`)
                 .then(flux => flux.json())
-                .then(arr => store.dispatch({type:PUBLIC_ACTION_GLOBAL.UPDATE_IMAGE_LIST,values:arr}));
-                fetch(`${REST_ADR_SRV}/memes`)
+                .then(arr => store.dispatch({ type: PUBLIC_ACTION_GLOBAL.UPDATE_IMAGE_LIST, values: arr }));
+            fetch(`${REST_ADR_SRV}/memes`)
                 .then(flux => flux.json())
-                .then(arr => store.dispatch({type:PUBLIC_ACTION_GLOBAL.UPDATE_MEME_LIST,values:arr}));
+                .then(arr => store.dispatch({ type: PUBLIC_ACTION_GLOBAL.UPDATE_MEME_LIST, values: arr }));
             return state;
         case PUBLIC_ACTION_GLOBAL.UPDATE_MEME_LIST:
-            return {...state,memes:action.values};
+            return { ...state, memes: action.values };
         case PUBLIC_ACTION_GLOBAL.UPDATE_IMAGE_LIST:
-            return {...state,images:action.values};
+            return { ...state, images: action.values };
         default:
             return state
     }
