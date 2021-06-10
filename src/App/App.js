@@ -3,6 +3,7 @@ import FlexLayout from './components/FlexLayout/FlexLayout';
 import MemeForm from './components/MemeForm/MemeForm';
 import MemeViewer from './components/MemeViewer/MemeViewer';
 import { REST_ADR_SRV } from './config/config';
+import store, { initialState, PUBLIC_ACTION_CURRENT } from './store/store';
 /**
  * Composant principale de notre application
  */
@@ -10,12 +11,20 @@ class App extends React.Component {
   //counter=1
   constructor(props) {
     super(props);
-    this.state = { current: { titre: 'bla', x: 10, y: 20, text: 'coucou', imageId: 2,color:'#000000', fsize:15 }, images:[] };
+    this.state = {
+      current: initialState.current,
+      images: []
+    };
   }
   componentDidMount() {
-    fetch(`${REST_ADR_SRV}/images`)
-      .then(flux => flux.json())
-      .then(arr => this.setState({ images: arr }))
+    this.setState({current:store.getState().current})
+    store.subscribe(()=>{
+      console.log('Etat de app mis a jour par subscribe');
+      this.setState({current:store.getState().current})
+    })
+    // fetch(`${REST_ADR_SRV}/images`)
+    //   .then(flux => flux.json())
+    //   .then(arr => this.setState({ images: arr }))
   }
   componentDidUpdate(pprops, pstate) {
     console.log(arguments);
@@ -29,8 +38,8 @@ class App extends React.Component {
         <div>
           <MemeViewer meme={{
             ...this.state.current,
-            image:this.state.images.find(e=>e.id===this.state.current.imageId)
-            }}/>
+            image: this.state.images.find(e => e.id === this.state.current.imageId)
+          }} />
         </div>
         <MemeForm images={this.state.images} onSubmit={formState => this.setState({ current: formState })} />
       </FlexLayout>
